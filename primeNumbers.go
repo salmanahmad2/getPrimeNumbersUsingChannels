@@ -4,12 +4,14 @@ import (
 	"fmt"
 )
 
-// prime number between 1-1000
-func prime(c chan int, num int) {
+func getStartNum(routineNum int, numGo int) int {
+	return (routineNum * numGo)
+}
+
+func prime(c chan int, numGo int, numStr int) {
 	sum := 0
 	f := 0
-
-	for i := num; i <= num+199; i++ {
+	for i := numStr; i < (numStr + numGo); i++ {
 		f = 0
 		half := i / 2
 		for j := 2; j <= half; j++ {
@@ -19,25 +21,37 @@ func prime(c chan int, num int) {
 			}
 		}
 
-		if f == 0 && i != 1 {
+		if f == 0 && i != 1 && i != 0 {
+			fmt.Println(i)
 			sum++
 		}
 	}
+
 	c <- sum
+
 }
 
 func main() {
 	sum := 0
-	c := make(chan int)
-	go prime(c, 1)
-	go prime(c, 201)
-	go prime(c, 401)
-	go prime(c, 601)
-	go prime(c, 801)
+	extra := 0
+	minRange := 98
+	maxRange := 1323
 
+	if (maxRange-(minRange-1))%5 != 0 {
+		extra = (maxRange - (minRange - 1)) % 5
+	}
+
+	var numGo int = int((maxRange - (minRange - 1)) / 5)
+	c := make(chan int)
+	go prime(c, numGo, minRange)
+	go prime(c, numGo, getStartNum(1, numGo)+minRange)
+	go prime(c, numGo, getStartNum(2, numGo)+minRange)
+	go prime(c, numGo, getStartNum(3, numGo)+minRange)
+	go prime(c, (numGo + extra), getStartNum(4, numGo)+minRange)
 	for i := 1; i <= 5; i++ {
 		sum = sum + <-c
 	}
 
-	fmt.Printf("Total number of prime numbers between 1-1000 are:%d", sum)
+	fmt.Printf("Total number of prime numbers between the range are:%d", sum)
+
 }
