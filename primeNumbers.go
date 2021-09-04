@@ -40,7 +40,7 @@ func main() {
 		extra = (maxRange - (minRange - 1)) % 5
 	}
 
-	var numGo int = int((maxRange - (minRange - 1)) / 5)
+	numGo := (maxRange - (minRange - 1)) / 5
 	c := make(chan int)
 	go prime(c, numGo, minRange)
 	go prime(c, numGo, getStartNum(1, numGo)+minRange)
