@@ -34,8 +34,8 @@ func prime(c chan int, numGo int, numStr int) {
 func main() {
 	sum := 0
 	extra := 0
-	minRange := 98
-	maxRange := 1323
+	minRange := 1
+	maxRange := 1000
 
 	if (maxRange-(minRange-1))%5 != 0 {
 		extra = (maxRange - (minRange - 1)) % 5
