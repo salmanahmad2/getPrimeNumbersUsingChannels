@@ -22,7 +22,6 @@ func prime(c chan int, numGo int, numStr int) {
 		}
 
 		if f == 0 && i != 1 && i != 0 {
-			fmt.Println(i)
 			sum++
 		}
 	}
