@@ -1,5 +1,5 @@
 # Prime numbers between 1-1000
-Find number of prime numbers between 1-1000 using go routines and channels
+Find number of prime numbers between 1-1000 using go routines and channels, each go routine must have same number of range i.e 1-200
 
 ## How to Run
 ### Install This
